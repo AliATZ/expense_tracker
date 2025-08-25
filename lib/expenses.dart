@@ -21,7 +21,7 @@ class _ExpensesState extends State<Expenses> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(children: [Text('Placeholder'), Text('Expenses')]),
+        child: Column(children: [Text('Placeholder'), ]),
       ),
     );
   }
