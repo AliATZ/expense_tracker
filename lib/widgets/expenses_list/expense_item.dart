@@ -19,9 +19,9 @@ class ExpenseItem extends StatelessWidget {
             Text('${expense.amount.toStringAsFixed(2)}'),
             const Spacer(),
             Row(children: [
-              const Icon(Icons.ac_unit_sharp),
+              Icon(categoryIcons[expense.category]),
               const SizedBox(width: 8,),
-              Text(expense.date.toString())
+              Text(expense.formatedDate)
             ],)
           ],)
         ],),
