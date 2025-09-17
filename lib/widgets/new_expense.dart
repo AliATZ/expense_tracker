@@ -14,6 +14,12 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
 
+  void _renderDatePicker(){
+    final now = DateTime.now();
+    final firstDate = DateTime(now.year - 1, now.month , now.day);
+    showDatePicker(context: context,initialDate: now, firstDate: firstDate , lastDate: now);
+  }
+
   @override
   void dispose() {
     _titleController.dispose();
@@ -27,21 +33,45 @@ class _NewExpenseState extends State<NewExpense> {
       padding: EdgeInsets.all(16),
       child: Column(
         children: [
-          TextField(
-            controller: _titleController,
-            maxLength: 50,
-            decoration: InputDecoration(label: Text('Title')),
-          ),
-          TextField(
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            decoration: InputDecoration(prefixText: '\$ ',label: Text('Amount')),
+            TextField(
+              controller: _titleController,
+              maxLength: 50,
+              decoration: InputDecoration(label: Text('Title')),
+            ),
+          Row(
+            children: [
+              Expanded(child: TextField(
+                controller: _amountController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  prefixText: '\$ ',
+                  label: Text('Amount'),
+                ),
+              )),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('selected date'),
+                    IconButton(
+                      onPressed: _renderDatePicker,
+                      icon: const Icon(CupertinoIcons.calendar),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Row(
             children: [
-              TextButton(onPressed: (){
-                Navigator.pop(context);
-              }, child: Text('Cancel')),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Cancel'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   print(_titleController.text);
